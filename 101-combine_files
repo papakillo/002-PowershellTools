@@ -1,3 +1,15 @@
+#==============================================================
+# Scriptname  : 101-combine_files.ps1
+# Description : script that copies the latest files from a specified 
+#               folder spanning the last 1 week, checks for folder existence,
+#               groups the files into batches based on creation or 
+#               modified date, zips the files, and logs the results to 
+#               a text file:
+# Author      : Benjamin Ohene-Adu
+# Date        : 16th May 2024
+#
+#==============================================================
+
 # Set the source and destination folder paths
 $sourceFolder = "C:\Users\Admin\Downloads"
 $destinationFolder = "C:\Users\Admin\Downloads\TestCopies"
@@ -14,6 +26,12 @@ if (-not (Test-Path $sourceFolder)) {
 # Create the destination folder if it doesn't exist
 if (-not (Test-Path $destinationFolder)) {
     New-Item -ItemType Directory -Path $destinationFolder | Out-Null
+}
+
+# Create the log file path if it doesn't exist
+$logFileDirectory = Split-Path $logFilePath -Parent
+if (-not (Test-Path $logFileDirectory)) {
+    New-Item -ItemType Directory -Path $logFileDirectory -Force | Out-Null
 }
 
 # Get the latest files from the last 1 week
@@ -38,7 +56,7 @@ foreach ($group in $fileGroups) {
 
     # Zip the files in the group folder
     $zipFilePath = Join-Path $groupFolder "$groupDate.zip"
-    Compress-Archive -Path (Join-Path $groupFolder "*") -DestinationPath $zipFilePath
+    Compress-Archive -Path (Join-Path $groupFolder "*") -DestinationPath $zipFilePath -Force
 
     # Log the results
     $logEntry = "Zipped files for $groupDate to $zipFilePath"
