@@ -7,7 +7,7 @@
 #               a text file:
 # Author      : Benjamin Ohene-Adu
 # Date        : 17th May 2024
-#
+# Version     : 1.89
 #==============================================================
 
 # Set the source and destination folder paths
