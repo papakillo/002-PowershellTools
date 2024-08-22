@@ -1,6 +1,6 @@
 #==============================================================
 # Scriptname  : 101-combine_files.ps1
-# Description : script that copies the latest files from a specified 
+# Description : The script copies the latest files from a specified 
 #               folder spanning the last 1 week, checks for folder existence,
 #               groups the files into batches based on creation or 
 #               modified date, zips the files, and logs the results to 
